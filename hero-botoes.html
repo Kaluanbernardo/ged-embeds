@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botões do hero — Portal da GED</title>
+<!-- Teste de embed no SharePoint (web part Inserir) a partir do GitHub Pages, 22/10/2026.
+     Links por parâmetro: ?sistemas=URL&documentos=URL&programas=URL&equipes=URL
+     Destino do clique: ?alvo=_top (padrão, abre na própria página do SharePoint) ou ?alvo=_blank (nova aba). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;background:transparent}
+  *{box-sizing:border-box}
+  .btns{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:1000px}
+  .btn{display:flex;align-items:center;gap:16px;min-height:64px;padding:16px;
+    background:rgba(138,20,32,.72);border:1px solid rgba(255,255,255,.3);border-left:4px solid #E30613;
+    color:#fff;text-decoration:none;font:800 16px/1.15 "Montserrat","Segoe UI",system-ui,sans-serif;text-transform:uppercase;
+    transition:background-color .15s ease-out,transform .15s ease-out}
+  .btn:hover{background:#8A1420;transform:translateY(-2px)}
+  .btn:focus-visible{outline:3px solid #FF8A8D;outline-offset:2px}
+  .ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  @media (max-width:1023px){.btns{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:520px){.btns{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<nav class="btns" aria-label="Atalhos do Portal da GED">
+  <a class="btn" data-chave="sistemas" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg><span>Sistemas</span></a>
+  <a class="btn" data-chave="documentos" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg><span>Documentos e orientações</span></a>
+  <a class="btn" data-chave="programas" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg><span>Programas</span></a>
+  <a class="btn" data-chave="equipes" href="#"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0"/><circle cx="10" cy="8" r="5"/><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3"/></svg><span>Equipes e contatos</span></a>
+</nav>
+<script>
+  const q = new URLSearchParams(location.search);
+  const alvo = q.get('alvo') === '_blank' ? '_blank' : '_top';
+  document.querySelectorAll('.btn').forEach(a => {
+    const url = q.get(a.dataset.chave);
+    if (url && /^https:\/\//.test(url)) a.href = url;
+    a.target = alvo;
+    if (alvo === '_blank') a.rel = 'noopener';
+  });
+</script>
+</body>
+</html>
